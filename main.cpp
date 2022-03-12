@@ -77,13 +77,14 @@ int main(int argc, char *argv[])
                         continue;
                     }
 
-                    fmt::print("{}> {}", l.connectedAddress().name(), std::string(bytes.begin(), bytes.end()));
+                    fmt::print("{}> {}\n", l.connectedAddress().name(), std::string(bytes.begin(), bytes.end()));
                     for (auto& cl : clientList)
                     {
-                        if (l != cl)
-                        {
+                        // This is to make sure the sender doesn't get their message echo'ed back to themselves by the server
+                        //if (l != cl)
+                        //{
                             cl.send(bytes);
-                        }
+                        //}
                     }
                 }
             }
